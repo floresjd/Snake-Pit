@@ -1,0 +1,61 @@
+Fall 2014 CS 31
+Programming Assignment 7
+Snake Pit
+
+Time due: 9:00 PM Thursday, December 11
+
+While doing field work in the rainforest, you slipped and fell into a deep pit infested with venomous snakes. This species of snake has a vulnerability: Right behind the back of the head is a soft spot such that if it's by a small rock, the snake will die. Fortunately, you are carrying a bag full of small rocks. However, the only way to accurately aim your throw is from above the snake, so you have to jump over it when throwing your rock.
+
+That's the scenario for a new video game under development. Your assignment is to complete the prototype that uses character-based graphics.
+If you execute this Windows program or this Mac program or this Linux program, you will see the player (indicated by @) in a rectangular pit filled with snakes (usually indicated by S). At each turn, the user will select an action for the player to take. The player will take the action, and then each snake will move one step in a random direction. If a snake lands on the grid point occupied by the player, the player dies.
+
+This smaller Windows version or Mac version or Linux version of the game may help you see the operation of the game more clearly.
+
+At each turn the player may take one of these actions:
+
+Stand. In this case, the player does not move.
+Move one step up, down, left, or right, to an adjacent vacant grid point. If the player attempts to move into the wall of the pit (e.g., down, when on the bottom row), the result is the same as standing.
+Move by jumping up, down, left, or right, over an adjacent snake, landing at the grid point on the other side of the snake. This kills the snake. If more than one snake is on the grid point that is jumped over, only one snake there dies. If the grid point on the other side of the adjacent snake has a snake in it, the player dies. If the adjacent snake is on a grid point next to the wall of the pit, the player can't jump over it, so it doesn't die and the result is the same as the player's standing.
+The game allows the user to select the player's action: u/d/l/r for movement, and just hitting enter for standing. The user may also type q to prematurely quit the game.
+
+When it's the snakes' turn, each snake picks a random direction (up, down, left, or right) with equal probability. The snake moves one step in that direction if it can; if the snake attempts to move into the wall of the pit, however, (e.g., down, when on the bottom row), it does not move. More than one snake may occupy the same grid point; in that case, instead of Z, the display will show a digit character indicating the number of snakes at that point (where 9 indicates 9 or more). If after the snakes move, a snake occupies the same grid point as the player, the player dies.
+
+Your assignment is to complete this C++ program skeleton to produce a program that implements the described behavior. (We've indicated where you have work to do by comments containing the text TODO; remove those comments as you finish each thing you have to do.) The program skeleton you are to flesh out defines four classes that represent the four kinds of objects this program works with: Game, Pit, Snake, and Player. Details of the interface to these classes are in the program skeleton, but here are the essential responsibilities of each class:
+
+Game
+
+To create a Game, you specify a number of rows and columns and the number of snakes to start with. The Game object creates an appropriately sized Pit and populates it with the Player and the Snakes.
+A game may be played.
+Pit
+
+When a Pit object of a particular size is created, it has no snakes or player. In the Pit coordinate system, row 1, column 1 is the upper-left-most position that can be occupied by a Snake or Player. (If a Pit were created with 9 rows and 10 columns, then the lower-right-most position that could be occupied would be row 9, column 10.)
+You may tell the Pit object to create or destroy a Snake at a particular position.
+You may tell the Pit object to create a Player at a particular position.
+You may tell the Pit object to have all the snakes in it make their move.
+You may ask the Pit object its size, how many snakes are at a particular grid point, and how many snakes altogether are in the Pit.
+You may ask the Pit object for access to its player.
+A Pit object may be displayed on the screen, showing the locations of the snakes and player, along with other status information.
+Player
+
+A Player is created at some position (using the Pit coordinate system, where row 1, column 1 is the upper-left-most position, etc.).
+You may tell a Player to stand or to move in a particular direction.
+You may tell a Player it has died.
+You may ask a Player for its position, alive/dead status, and age. (The age is the count of how many turns the player has survived.)
+Snake
+
+A Snake is created at some position (using the Pit coordinate system, where row 1, column 1 is the upper-left-most position, etc.).
+You may tell a Snake to move.
+You may ask a Snake object for its position.
+The skeleton program you are to complete has all of the class definitions and implementations in one source file, which is awkward. Since we haven't yet learned about separate compilation, we'll have to live with it.
+
+Complete the implementation in accordance with the description of the game. You are allowed to make whatever changes you want to the private parts of the classes: You may add or remove private data members or private member functions, or change their types. You must not make any deletions, additions, or changes to the public interface of any of these classes — we're depending on them staying the same so that we can test your programs. You can, of course, make changes to the implementations of public member functions, since the callers of the function wouldn't have to change any of the code they write to call the function. You must not declare any public data members, nor use any global variables other than the global constants already in the skeleton code, except that you may add additional global constants if you wish. You may add additional functions that are not members of any class. The word friend must not appear in your program.
+
+Any member functions you implement must never put an object into an invalid state, one that will cause a problem later on. (For example, bad things could come from placing a snake outside the pit.) Any function that has a reasonable way of indicating failure through its return value should do so. Constructors pose a special difficulty because they can't return a value. If a constructor can't do its job, we have it write an error message and exit the program with failure by calling exit(1);. (We haven't learned about throwing an exception to signal constructor failure.)
+
+What you will turn in for this assignment is a zip file containing this one file and nothing more:
+
+A text file named snakepit.cpp that contains the source code for the completed C++ program. This program must build successfully, and its correctness must not depend on undefined program behavior. Your program must not leak memory: Any object dynamically allocated during the execution of your program must be deleted (once only, of course) by the time your main routine returns normally.
+
+Notice that you do not have to turn in a report describing the design of the program and your test cases.
+
+The turn in Project 7 link on the class webpage enables you to turn in your zip file electronically. Turn in the file by the due time above.
